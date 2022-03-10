@@ -29,6 +29,6 @@ This is a Team Profile Generator that assists in dynamically createing a html fi
 * Preview Content: [insert video link]
 
 ## Link
-* Repository:
+* Repository: https://github.com/AmyWilhoite/team-profile-generator.git
 
 
