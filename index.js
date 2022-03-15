@@ -9,13 +9,14 @@ const employee = require("./lib/employee");
 const manager = require ("./lib/manager");
 const engineer = require ("./lib/engineer");
 const intern = require ("./lib/intern");
+const Prompt = require('inquirer/lib/prompts/base');
 
 // TODO: identify output location
 
-// TODO: Create array for employee data inputs
+// TODO: Create array for employee data inputs, parent object
 const addEmployee = [
           {
-            type: 'list',
+            type: 'input',
             name: 'pickRole',
             message: 'Which team member would you like to add?',
             choices: [ 'Manager', 'Engineer', 'Intern'],
@@ -37,15 +38,31 @@ const addEmployee = [
           },
     ];
 
- // if manager include office number + override role
-    {
-      type: 'input',
-      name: 'officePhone',
-      message: 'What is your office phone number?',
-    },
-    
-
-  // if engineer include Github + repository + over ride role
+    .then(pickRole, employeeID, name, email) => {
+      if(role ==='Manager') {
+        return inquirer
+        .prompt([
+        // if manager include office number + override role
+          {
+            type: 'input',
+            name: 'officePhone',
+            message: 'What is your office phone number?',
+          }, 
+          {
+            type: 'confirm',
+            name: 'addAnother',
+            message: 'Would you like to add another team member?',
+            default: false;
+          }])
+        .then(({officePhone, addAnother}) => {
+          manager.push(newManager(employee, id, email, officePhone))
+          if (addAnother) {
+            return Prompt();
+          }
+        })
+      } else if (role === "Engineer"){return inquirer
+        .prompt([
+        // if engineer include Github + repository + over ride role
     {
       type: 'input',
       name: 'gitHub',
@@ -58,15 +75,27 @@ const addEmployee = [
       message: 'What is your github repository url?',
     },
 
-
-    // if intern include school
-    {
+    .then(({gitHub, githubLink, addAnother}) => {
+      engineer.push(newEngineer(employee, id, email, gitHub, githubLink))
+      if (addAnother) {
+        return Prompt();
+      }
+    })
+    } else if (role === "Intern"){
+      return inquirer
+      .prompt([
+     // if intern include school
+     {
       type: 'input',
       name: 'school',
       message: 'What is your school name?',
     },
-
-
+  .then(({school, addAnother}) => {
+    intern.push(newIntern(employee, id, email, school))
+    if (addAnother) {
+      return Prompt();
+    }
+  });
 
 // function to write HTML file
 // syntax: fs.writeFile( file, data, options, callback )
