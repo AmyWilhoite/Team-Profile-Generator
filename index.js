@@ -14,7 +14,10 @@ const Prompt = require('inquirer/lib/prompts/base');
 // TODO: identify output location
 
 // TODO: Create array for employee data inputs, parent object
-const addEmployee = [
+function Prompt () {
+  
+  return inquirer
+  .prompt([
           {
             type: 'input',
             name: 'pickRole',
@@ -36,9 +39,8 @@ const addEmployee = [
             name: 'email',
             message: 'What is the team member email?',
           },
-    ];
-
-    .then(pickRole, employeeID, name, email) => {
+        ])
+    .then(({pickRole, employeeID, name, email}) => {
       if(role ==='Manager') {
         return inquirer
         .prompt([
@@ -73,7 +75,7 @@ const addEmployee = [
       type: 'input',
       name: 'githubLink',
       message: 'What is your github repository url?',
-    },
+    }])
 
     .then(({gitHub, githubLink, addAnother}) => {
       engineer.push(newEngineer(employee, id, email, gitHub, githubLink))
@@ -81,6 +83,7 @@ const addEmployee = [
         return Prompt();
       }
     })
+
     } else if (role === "Intern"){
       return inquirer
       .prompt([
@@ -89,13 +92,15 @@ const addEmployee = [
       type: 'input',
       name: 'school',
       message: 'What is your school name?',
-    },
+    }])
+
   .then(({school, addAnother}) => {
     intern.push(newIntern(employee, id, email, school))
     if (addAnother) {
       return Prompt();
     }
-  });
+  })
+};
 
 // function to write HTML file
 // syntax: fs.writeFile( file, data, options, callback )
@@ -109,7 +114,8 @@ function init() {
     inquirer
     .prompt(addEmployee)
     .then ((data) => writeToFile(data.title, data))
-};
+  
+    }
 
 // Function call to initialize app
 init();
