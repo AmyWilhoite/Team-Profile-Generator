@@ -1,0 +1,24 @@
+{
+  "name": "team-profile-generator",
+  "version": "1.0.0",
+  "description": "## Description This is a Team Profile Generator that assists in dynamically createing a html file with your team's basic info using simple command line prompts and displays a formatted team roster based on user inputs and is invoked by using node index.js.",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AmyWilhoite/team-profile-generator.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AmyWilhoite/team-profile-generator/issues"
+  },
+  "homepage": "https://github.com/AmyWilhoite/team-profile-generator#readme"
+}

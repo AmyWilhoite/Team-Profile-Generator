@@ -5,6 +5,12 @@ This is a Team Profile Generator that assists in dynamically createing a html fi
 
 * Uses inquirer package to generate a html file and was tested with jest and creates the following type profiles: 
 
+## Instructions
+Install node package npm install -y
+Install inquirer npm i
+Run test npm test
+
+
 # Employees
 * `name`
 * `id`
