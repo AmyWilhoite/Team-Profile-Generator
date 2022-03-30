@@ -16,20 +16,43 @@ function generateHTML(data) {
     <div class="card-group">
       <div class="jumbotron-fluid">
         <div class="card m-3 jumbotron-fluid">
-         <div class="card " style = "max-width:18rem;">
+         <div class="card m-2" style = "max-width:18rem;">
          <div class="card-body">
       <!-- // Employee -->
-          <h5 class="card-title">Role:${data.role}</h5>
-          <p class="card-text">Name: ${data.name}</p>
-          <p class="card-text">Email: ${data.email}</p> 
+          <h5 class="card-title">Role:${data.title}</h5>
+          <p class="card-text">Name:${data.name} </p>
+          <p class="card-text">Email: ${data.email} </p> 
         <!-- // Manager + override Role-->
-          <p class="card-text">Office Number: ${data.officePhone}</p>
+          <p class="card-text">Office Number:${data.officePhone} </p>
+        <p class="card-text"><small class="text-muted">ID:${data.employeeID}</small></p>
+    
+          </div>
+          </div>
+          <div class="card m-2" style = "max-width:18rem;">
+            <div class="card-body">
+              <div class="card-body">
+                <!-- // Employee -->
+                    <h5 class="card-title">Role:${data.title}</h5>
+                    <p class="card-text">Name:${data.name}</p>
+                    <p class="card-text">Email:${data.email}</p> 
           <!-- // Engineer + override Role-->
-          <p class="card-text">GitHub Username: ${data.userName}</p>
-          <p class="card-text">GitHub Link: ${data.githubLink}</p>
+          <p class="card-text">GitHub Username: ${data.userName} </p>
+          <p class="card-text">GitHub Link:${data.githubLink} </p>
+        <p class="card-text"><small class="text-muted">ID:${data.employeeID}</small></p>
+    
+          </div>
+        </div>
+       
+        <div class="card m-2" style = "max-width:18rem;">
+          <div class="card-body">
+            <div class="card-body">
+              <!-- // Employee -->
+                  <h5 class="card-title">Role:${data.title}</h5>
+                  <p class="card-text">Name: </p>
+                  <p class="card-text">Email: </p>
           <!-- // Intern + override Role-->
-          <p class="card-text">School: ${data.employeeID}</p>
-        <p class="card-text"><small class="text-muted">${data.employeeID}</small></p>
+          <p class="card-text">School: </p>
+        <p class="card-text"><small class="text-muted">ID: ${data.employeeID}</small></p>
         </div>
         </div>
       </div>

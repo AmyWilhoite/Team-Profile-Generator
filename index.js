@@ -1,33 +1,31 @@
 // packages 
 // TODO: include jest
-const inquirer = require('inquirer');
-const fs = require('fs');
 const generateHTML = require('./src/generateHTML'); //get HTML template
+const fs = require('fs');
+const inquirer = require('inquirer');
+
 
 // team profile
 const employee = require("./lib/employee");
 const manager = require ("./lib/manager");
 const engineer = require ("./lib/engineer");
 const intern = require ("./lib/intern");
-const Prompt = require('inquirer/lib/prompts/base');
 
 // TODO: identify output location
-let teamArray = {manager, engineer, intern};
-let employeeArray = [];
-let managerArray =[];
-let internArray = [];
+
+
+let addEmployee = [];
 
 
 // TODO: Create array for employee data inputs, parent object
-function Prompt () {
-  
-  return inquirer
-  .prompt([
+// all employee have these basic fields
+function promptUser () {
+  return inquirer.prompt([
           {
-            type: 'input',
+            type: 'list',
             name: 'pickRole',
             message: 'Which team member would you like to add?',
-            choices: [ 'Manager', 'Engineer', 'Intern'],
+            choices: [ 'Manager', 'Engineer', 'Intern', 'Generate HTML'],
           },       
           {
             type: 'input',
@@ -44,9 +42,9 @@ function Prompt () {
             name: 'email',
             message: 'What is the team member email?',
           }])
-         // if manager include office number + override role
+         // if manager include office number & offer to add next
           .then(({pickRole, employeeID, name, email}) => {
-            if(role ==='Manager') {
+            if(pickRole ==='Manager') {
               return inquirer
                   .prompt([
                     {
@@ -62,21 +60,20 @@ function Prompt () {
                     }
                   ]) 
                   .then(({officePhone, addAnother}) => {
-                        manager.push(new Manager(employee, id, email, officePhone))
+                        manager.push(addEmployee(employee, employeeID, email, officePhone))
                         if (addAnother) {
-                          return Prompt();
+                          return promptUser();
                         }
                       })
-              } else if (role === "Engineer"){
+              // if engineer include Github + repository      
+              } else if (pickRole === "Engineer"){
                 return inquirer
                   .prompt([
-                  // if engineer include Github + repository + over ride role
                   {
                     type: 'input',
                     name: 'gitHub',
                     message: 'What is your github username?',
                   },
-
                   {
                     type: 'input',
                     name: 'githubLink',
@@ -84,16 +81,16 @@ function Prompt () {
                   }])
 
               .then(({gitHub, githubLink, addAnother}) => {
-                engineer.push(newEngineer(employee, id, email, gitHub, githubLink))
+                engineer.push(addEmployee(employee, employeeId, email, gitHub, githubLink))
                 if (addAnother) {
-                  return Prompt();
+                  return promptUser();
                 }
               })
 
-            } else if (role === "Intern"){
+            } else if (pickRole === "Intern"){
               return inquirer
               .prompt([
-            // if intern include school
+            // if intern include school //child 3
             {
               type: 'input',
               name: 'school',
@@ -103,9 +100,12 @@ function Prompt () {
             .then(({school, addAnother}) => {
               intern.push(newIntern(employee, id, email, school))
               if (addAnother) {
-                return Prompt();
+                return promptUser();
               }
             })
+        }else {
+          //build the html page 
+          console.log("building html")
         }
       })
     
@@ -120,11 +120,12 @@ function writeToFile(fileName, data) {
 
 // function to initialize app
 function init() {
-    inquirer
-    .prompt(addEmployee)
-    .then ((data) => writeToFile(data.title, data))
-  
-    };
+  // inquirer 
+  // .prompt()
+  // .then ((data) => writeToFile(data.title, data))
+  promptUser();
+
+  };
 
 // Function call to initialize app
 init();
