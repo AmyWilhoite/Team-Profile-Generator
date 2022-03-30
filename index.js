@@ -6,15 +6,16 @@ const inquirer = require('inquirer');
 
 
 // team profile
-const employee = require("./lib/employee");
-const manager = require ("./lib/manager");
-const engineer = require ("./lib/engineer");
-const intern = require ("./lib/intern");
+const Intern = require ("./lib/intern");
+const Engineer = require('./lib/engineer');
+const Manager = require('./lib/manager');
 
 // TODO: identify output location
 
-
-let addEmployee = [];
+let manager = [];
+let engineer = [];
+let intern = [];
+let addEmployee = {manager, engineer, intern};
 
 
 // TODO: Create array for employee data inputs, parent object
@@ -29,7 +30,7 @@ function promptUser () {
           },       
           {
             type: 'input',
-            name: 'employeeID',
+            name: 'id',
             message: 'What is the team member employee ID?',
           },
           {
@@ -43,7 +44,7 @@ function promptUser () {
             message: 'What is the team member email?',
           }])
          // if manager include office number & offer to add next
-          .then(({pickRole, employeeID, name, email}) => {
+          .then(({pickRole, id, name, email}) => {
             if(pickRole ==='Manager') {
               return inquirer
                   .prompt([
@@ -60,7 +61,8 @@ function promptUser () {
                     }
                   ]) 
                   .then(({officePhone, addAnother}) => {
-                        manager.push(addEmployee(employee, employeeID, email, officePhone))
+                        manager.push(new Manager (name, id, email, officePhone))
+                        console.log(addEmployee)
                         if (addAnother) {
                           return promptUser();
                         }
@@ -81,7 +83,8 @@ function promptUser () {
                   }])
 
               .then(({gitHub, githubLink, addAnother}) => {
-                engineer.push(addEmployee(employee, employeeId, email, gitHub, githubLink))
+                engineer.push(new Engineer(name, id, email, gitHub, githubLink))
+                console.log(addEmployee)
                 if (addAnother) {
                   return promptUser();
                 }
@@ -98,23 +101,22 @@ function promptUser () {
             }])
 
             .then(({school, addAnother}) => {
-              intern.push(newIntern(employee, id, email, school))
+              intern.push(new Intern(name, id, email, school))
               if (addAnother) {
                 return promptUser();
               }
+             else  {
+              //build the html page 
+                console.log("building html")
+              }
             })
-        }else {
-          //build the html page 
-          console.log("building html")
-        }
-      })
-    
-  };
+          }
+        });
 
 // function to write HTML file
 // syntax: fs.writeFile( file, data, options, callback )
 function writeToFile(fileName, data) {
-    fs.writeFile(fileName + ".html", generateHTML(data), (err) =>
+    fs.writeFile('./dist/index.html', generateHTML(data), (err) =>
     err ? console.log(err) : console.log('Success!!!'))
 };
 
@@ -123,9 +125,13 @@ function init() {
   // inquirer 
   // .prompt()
   // .then ((data) => writeToFile(data.title, data))
-  promptUser();
+ promptUser()
+  .then(createTeam =>
+    return generateHTML(addEmployee)
+  })
+   .then (popHTML =>{
+     return fs.writeFile(popHTML)
+   })
 
-  };
-
-// Function call to initialize app
+   // Function call to initialize app 
 init();
