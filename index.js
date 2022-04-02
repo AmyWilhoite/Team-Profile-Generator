@@ -111,7 +111,8 @@ function promptUser () {
               }
             })
           }
-        });
+        })
+      }
 
 // function to write HTML file
 // syntax: fs.writeFile( file, data, options, callback )
@@ -122,16 +123,17 @@ function writeToFile(fileName, data) {
 
 // function to initialize app
 function init() {
-  // inquirer 
-  // .prompt()
-  // .then ((data) => writeToFile(data.title, data))
+//   // inquirer 
+//   // .prompt()
+//   // .then ((data) => writeToFile(data.title, data))
  promptUser()
-  .then(createTeam =>
-    return generateHTML(addEmployee)
+  .then(data => {
+    return writeToFile(addEmployee)
   })
-   .then (popHTML =>{
-     return fs.writeFile(popHTML)
+   .then (data =>{
+     return fs.writeFile(data)
    })
+};
 
    // Function call to initialize app 
 init();
