@@ -38,4 +38,6 @@ Run index.js (with inquirer) using code node index.js
 ## Link
 * Repository: https://github.com/AmyWilhoite/team-profile-generator.git
 
+## License
+![Github licence](http://img.shields.io/badge/license-MIT-blue.svg)
 
