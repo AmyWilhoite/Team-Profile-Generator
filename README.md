@@ -14,14 +14,13 @@ This is a Team Profile Generator dynamically creates a html file for team's basi
 
 
 ## Preview
-![preview](/assets/preview.png)
+![App preview](/assets/preview.png)
 
 
 ## Link
-* Walk through Video: 
+* Walk through Video Deployed Code: https://drive.google.com/file/d/1toy-ZdWui-QvBr00GgbJBO8bBLIw2QAm/view  
+* Walk through Video Tests: https://drive.google.com/file/d/1rMAr7wpTf3VEBaiLY2LeZT6b-8BvcmF8/view
 * Repository: https://github.com/AmyWilhoite/team-profile-generator.git
 
-## License
-![Github licence](http://img.shields.io/badge/license-MIT-blue.svg)
 
 ## License
