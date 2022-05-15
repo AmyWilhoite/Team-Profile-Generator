@@ -21,5 +21,7 @@ This is a Team Profile Generator dynamically creates a html file for team's basi
 * Walk through Video: 
 * Repository: https://github.com/AmyWilhoite/team-profile-generator.git
 
+## License
+![Github licence](http://img.shields.io/badge/license-MIT-blue.svg)
 
 ## License
